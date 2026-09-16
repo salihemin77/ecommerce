@@ -6,37 +6,47 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "order_item")
 public class OrderItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-   private  int quantity;
+    private Integer quantity;
 
-   @ManyToOne
-   @JoinColumn(name = "order_id")
-   @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    @JsonIgnore
     private Order order;
 
-
-  @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonIgnore
     private Product product;
 
-  public  OrderItem() {
+    @Transient
+    private Integer productId;
 
-  }
+    public OrderItem() {
+    }
 
-    public OrderItem(int quantity) {
+    public OrderItem(Integer quantity) {
         this.quantity = quantity;
     }
 
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Order getOrder() {
@@ -55,11 +65,11 @@ public class OrderItem {
         this.product = product;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 }

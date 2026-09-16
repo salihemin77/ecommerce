@@ -3,74 +3,43 @@ package com.example.ecommerce.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name = "product")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+
     @Column(name = "name")
     private String name;
-    @Column(name = "description")
-    private String description;
+
     @Column(name = "price")
-    private int price;
+    private Double price;
+
     @Column(name = "stock")
-    private int stock;
+    private Integer stock;
 
+    // ✅ EKSİK OLAN KISIM: Category ilişkisi eklendi
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "category_id")
+    @JsonIgnore // Sonsuz döngüyü (Infinite Recursion) önler
     private Category category;
-    @OneToMany(mappedBy = "product")
-    private List<CartItem> cartItems = new ArrayList<>();
 
-    @OneToMany(mappedBy = "product")
-    private List<OrderItem> orderItems = new ArrayList<>();
-
-    public List<CartItem> getCartItems() {
-        return cartItems;
+    public Product() {
     }
 
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
-    }
-
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
-    public  Product() {
-
-    }
-
-    public Product(String description,  String name, int price, int stock) {
-        this.description = description;
-
+    public Product(String name, Double price, Integer stock) {
         this.name = name;
         this.price = price;
         this.stock = stock;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -82,38 +51,28 @@ public class Product {
         this.name = name;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public int getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
+    // ✅ Category Getter ve Setter Metotları
     public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "description='" + description + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", stock=" + stock +
-                '}';
     }
 }

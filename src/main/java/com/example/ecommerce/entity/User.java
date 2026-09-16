@@ -1,5 +1,6 @@
 package com.example.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,10 +21,25 @@ public class User {
     @Column(name = "role")
     private String role;
      @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+     @JsonIgnore
      private List<Adress> adresses=new ArrayList<>();
 
      @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+     @JsonIgnore
     private Cart cart;
+
+     @OneToMany(mappedBy = "user")
+     @JsonIgnore
+     private List<Order> orders=new ArrayList<>();
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     public Cart getCart() {
         return cart;
     }
