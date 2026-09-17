@@ -13,4 +13,6 @@ public interface OrderService {
     List<Order> findAll();
 
     Order save(Order order);
+    Order update(Order order);
+
 }

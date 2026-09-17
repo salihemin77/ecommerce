@@ -20,9 +20,11 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
-    @ManyToOne()
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     @Transient
     private Integer userId;
 
@@ -49,8 +51,6 @@ public class Order {
         this.status = status;
         this.totalPrice = totalPrice;
     }
-
-
 
     public Integer getId() {
         return id;

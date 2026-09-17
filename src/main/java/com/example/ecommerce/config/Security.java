@@ -84,7 +84,7 @@ public class Security {
                     .requestMatchers(HttpMethod.GET, "/api/order-items/**").hasRole("USER")
                     .requestMatchers(HttpMethod.POST, "/api/order-items").hasRole("USER")
                     .requestMatchers(HttpMethod.DELETE, "/api/order-items/**").hasRole("MANAGER")
-
+                    .requestMatchers(HttpMethod.PUT, "/api/orders/**").hasRole("USER")
 
     );
 

@@ -66,6 +66,10 @@ public class OrderItem {
     }
 
     public Integer getProductId() {
+        if (product != null) {
+            return product.getId();
+        }
+
         return productId;
     }
 

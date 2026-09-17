@@ -27,10 +27,17 @@ public class OrderController {
     public Order save(@RequestBody Order order) {
         return orderService.save(order);
     }
+    @PutMapping("/orders/{id}")
+    public Order update(@PathVariable int id, @RequestBody Order order) {
+       order.setId(id);
+       return orderService.update(order);
+
+    }
     @DeleteMapping("/orders/{id}")
     public void deleteById(@PathVariable int id) {
         orderService.deleteById(id);
     }
+
 
 
 }

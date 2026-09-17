@@ -20,10 +20,9 @@ public class Product {
     @Column(name = "stock")
     private Integer stock;
 
-    // ✅ EKSİK OLAN KISIM: Category ilişkisi eklendi
     @ManyToOne
     @JoinColumn(name = "category_id")
-    @JsonIgnore // Sonsuz döngüyü (Infinite Recursion) önler
+    @JsonIgnore
     private Category category;
 
     public Product() {
@@ -67,7 +66,6 @@ public class Product {
         this.stock = stock;
     }
 
-    // ✅ Category Getter ve Setter Metotları
     public Category getCategory() {
         return category;
     }
