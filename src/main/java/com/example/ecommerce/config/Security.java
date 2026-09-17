@@ -50,7 +50,12 @@ public class Security {
 @Bean
     public SecurityFilterChain  securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(configurer->
+
             configurer
+                    .requestMatchers(
+                            "/swagger-ui/**",
+                            "/v3/api-docs/**"
+                    ).permitAll()
 
 
                     .requestMatchers(HttpMethod.GET,"/api/categories").hasRole("USER")
